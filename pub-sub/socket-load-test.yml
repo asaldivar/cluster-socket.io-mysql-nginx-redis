@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:9000'
+  phases:
+    - duration: 10
+      arrivalRate: 500
+scenarios:
+  - name: 'A user that just lurks'
+    engine: 'socketio'
+    flow:
+      - get:
+          url: '/'
+      - emit:
+          channel: 'add user'
+          data: 'lurker-{{$randomString()}}'
+      - think: 10
